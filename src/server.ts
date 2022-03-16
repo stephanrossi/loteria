@@ -1,14 +1,22 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from 'cors'
 import mustache from "mustache-express"
 import path from "path"
 import router from './routes'
+import bodyParser from "body-parser"
 
 //Initialize DOTENV
 dotenv.config()
 
 //Initialize express
 const app = express()
+
+//Initialize CORS
+app.use(cors())
+
+//Initialize bodyparser to get forms data
+app.use(bodyParser.urlencoded({ extended: false }))
 
 //Set view engine
 app.set("view engine", "mst")
