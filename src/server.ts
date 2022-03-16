@@ -27,5 +27,6 @@ app.use((req, res) => {
 })
 
 //Start server
-app.listen(process.env.PORT || 3000)
-console.log("\n" + "Server running" + "\n")
+app.listen(process.env.APP_PORT, () => {
+    console.log("\n" + "Server running at: http://localhost:" + process.env.APP_PORT + "\n")
+})
