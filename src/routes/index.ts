@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as LoteriaController from '../controllers/loteriaController'
+import * as testeController from '../controllers/testeController'
 
 const router = Router()
 
@@ -8,5 +9,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/mega', LoteriaController.mega)
+
+router.post('/megateste', testeController.getMega)
 
 export default router

@@ -15,6 +15,9 @@ const app = express()
 //Initialize CORS
 app.use(cors())
 
+//Initialize JSON
+app.use(express.json())
+
 //Initialize bodyparser to get forms data
 app.use(bodyParser.urlencoded({ extended: false }))
 
