@@ -1,6 +1,9 @@
 import axios from "axios";
+import dotenv from 'dotenv';
 
-interface IData {
+dotenv.config()
+
+export interface IData {
     nome: string,
     data: string,
     concurso: number,
@@ -10,8 +13,6 @@ interface IData {
     acumuladaProxConcurso: string,
 }
 
-export async function getData<T = unknown>(url: string) {
-    const { data: AxiosResponse<IData> } = await axios.get<IData[]>(url)
-
-return data
-}
+export default axios.create({
+    baseURL: process.env.API_BASE_URL
+})
