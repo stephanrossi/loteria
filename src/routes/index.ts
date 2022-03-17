@@ -4,7 +4,7 @@ import * as LoteriaController from '../controllers/loteriaController'
 const router = Router()
 
 router.get('/', (req, res) => {
-    res.send('Home')
+    res.render('pages/index')
 })
 
 router.get('/mega', LoteriaController.mega)

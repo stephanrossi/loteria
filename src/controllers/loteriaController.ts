@@ -1,11 +1,12 @@
 import api from '../services/api'
+import { IData } from '../services/api'
 import { Request, Response } from 'express'
 
 export const mega = async (req: Request, res: Response) => {
     const numeros_sorteados = []
 
     try {
-        const { data } = await api.get('/mega-sena/latest')
+        const { data } = await api.get<IData>('/mega-sena/latest')
 
         for (let i in data.dezenas) {
             numeros_sorteados.push({ 'dezenas': data.dezenas[i] })
