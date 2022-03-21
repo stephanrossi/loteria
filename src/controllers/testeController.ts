@@ -7,7 +7,7 @@ export const getMega = async (req: Request, res: Response) => {
     const loto = await prismaClient.mega.create({
         data: {
             concurso,
-            data: new Date(),
+            data: new Date(data),
             dezenas,
             premiacoes,
             acumulou,

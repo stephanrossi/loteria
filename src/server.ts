@@ -22,8 +22,8 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //Set view engine
-app.set("view engine", "mst")
 app.set("views", path.join(__dirname, "views"))
+app.set("view engine", "mst")
 app.engine("mst", mustache())
 
 //Set public folder

@@ -2,10 +2,10 @@
 <p>Data do concurso: {{data.data}}</p>
 
 Dezenas sorteadas:
-{{#sorteio}}
+{{#list}}
 <ul>
     <li>
         {{dezenas}}
     </li>
 </ul>
-{{/sorteio}}
+{{/list}}
