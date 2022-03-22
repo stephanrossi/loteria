@@ -14,9 +14,9 @@ export const mega = {
             throw new Error('Algum erro ocorreu')
         }
     },
-    getByDrawing: async (lottery: string, drawing: number) => {
+    getByDrawing: async (drawing: string) => {
         try {
-            const { data } = await api.get<IData>(`'/${lottery}/${drawing}'`)
+            const { data } = await api.get<IData>(`mega-sena/${parseInt(drawing)}`)
 
             return data;
         } catch (e) {

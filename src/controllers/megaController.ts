@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { mega } from '../models/Mega'
 
-export const all = async (req: Request, res: Response) => {
+export const latest = async (req: Request, res: Response) => {
     let list = await mega.getLatest()
 
     return res.render('pages/mega', {
@@ -10,12 +10,12 @@ export const all = async (req: Request, res: Response) => {
 }
 
 export const byDrawing = async (req: Request, res: Response) => {
-    let { lottery, drawing } = req.params
+    const query = req.query.s as string
 
-    let list = await mega.getByDrawing(lottery, parseInt(drawing))   
+    const list = await mega.getByDrawing(query)
 
-    // return res.render('pages/mega', {
-    //     list
-    // })
+    return res.render('pages/mega', {
+        list
+    })
 }
 
