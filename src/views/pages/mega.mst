@@ -1,11 +1,20 @@
-<p> Concurso: {{data.concurso}}</p>
-<p>Data do concurso: {{data.data}}</p>
+<p> Concurso: {{concurso}} </p>
+<p>Data do concurso: {{data}}</p>
 
 Dezenas sorteadas:
-{{#list}}
+<ul>
+    {{#dezenas}}
+    <li>
+        {{.}}
+    </li>
+    {{/dezenas}}
+</ul>
+
+Dezenas acertadas:
+{{#acertadas}}
 <ul>
     <li>
-        {{dezenas}}
+        {{.}}
     </li>
 </ul>
-{{/list}}
+{{/acertadas}}

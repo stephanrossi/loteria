@@ -8,14 +8,13 @@ datasource db {
 }
 
 model Mega {
-  id                      Int      @id @default(autoincrement())
-  concurso                Int      @unique
-  data                    DateTime
-  dezenas                 String
-  premiacoes              String
-  acumulou                Boolean
-  acumulado_prox_concurso String
-  created_at              DateTime @default(now())
+  id                    Int      @id @default(autoincrement())
+  concurso              Int      @unique
+  date                  String
+  dezenas               String[]
+  acumulou              Boolean
+  acumuladaProxConcurso String
+  created_at            DateTime @default(now())
 
   @@map("mega_sena")
 }
@@ -23,9 +22,8 @@ model Mega {
 model Lotomania {
   id                      Int      @id @default(autoincrement())
   concurso                Int      @unique
-  data                    DateTime
-  dezenas                 String
-  premiacoes              String
+  date                    String
+  dezenas                 String[]
   acumulou                Boolean
   acumulado_prox_concurso String
   created_at              DateTime @default(now())
@@ -36,9 +34,8 @@ model Lotomania {
 model Quina {
   id                      Int      @id @default(autoincrement())
   concurso                Int      @unique
-  data                    DateTime
-  dezenas                 String
-  premiacoes              String
+  date                    String
+  dezenas                 String[]
   acumulou                Boolean
   acumulado_prox_concurso String
   created_at              DateTime @default(now())
@@ -49,9 +46,8 @@ model Quina {
 model Lotofacil {
   id                      Int      @id @default(autoincrement())
   concurso                Int      @unique
-  data                    DateTime
-  dezenas                 String
-  premiacoes              String
+  date                    String
+  dezenas                 String[]
   acumulou                Boolean
   acumulado_prox_concurso String
   created_at              DateTime @default(now())

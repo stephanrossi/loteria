@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as MegaController from '../controllers/megaController'
+import * as MegaController from '../controllers/megaController.js'
 
 const router = Router()
 
@@ -8,6 +8,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/mega-sena', MegaController.latest)
-router.get('/mega-sena/concurso', MegaController.byDrawing)
+router.get('/mega-sena/concurso/', MegaController.byDrawing)
 
 export default router
