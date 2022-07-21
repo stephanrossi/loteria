@@ -4,12 +4,12 @@ import api from '../services/api.js'
 import { prisma } from './../database/prismaClient.js';
 
 export const mega = {
-    create: async (concurso, date, dezenas, acumulou, acumuladaProxConcurso) => {
+    createBet: async (concurso, apostas, dezenas = '') => {
         try {
             await prisma.mega.upsert({
                 where: { concurso },
-                update: { dezenas, acumulou, acumuladaProxConcurso },
-                create: { concurso, date, dezenas, acumulou, acumuladaProxConcurso }
+                update: { apostas },
+                create: { concurso, apostas, dezenas }
             })
         }
         catch (e) {
@@ -36,6 +36,17 @@ export const mega = {
         catch (e) {
             console.log(e);
             throw new Error('Algum erro ocorreu')
+        }
+    },
+    getBetByDrawing: async (concurso) => {
+        try {
+            let bet = await prisma.mega.findUnique({
+                where: { concurso }
+            })
+
+            return bet
+        } catch (e) {
+            console.log(e);
         }
     }
 }

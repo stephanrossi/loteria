@@ -10,10 +10,11 @@ datasource db {
 model Mega {
   id                    Int      @id @default(autoincrement())
   concurso              Int      @unique
-  date                  String
+  date                  String?
   dezenas               String[]
-  acumulou              Boolean
-  acumuladaProxConcurso String
+  apostas               String[]
+  acumulou              Boolean?
+  acumuladaProxConcurso String?
   created_at            DateTime @default(now())
 
   @@map("mega_sena")
