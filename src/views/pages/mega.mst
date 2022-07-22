@@ -1,5 +1,7 @@
-<p> Concurso: {{concurso}} </p>
-<p>Data do concurso: {{data}}</p>
+<p>Concurso: {{concurso}} </p>
+<p>Data do concurso: {{date}}</p>
+<p>Acumulou: {{acumulou}}</p>
+<p>Acumulado para o próximo concurso: {{acumuladaProxConcurso}}</p>
 
 Dezenas sorteadas:
 <ul>
@@ -11,10 +13,10 @@ Dezenas sorteadas:
 </ul>
 
 Dezenas acertadas:
-{{#acertadas}}
+{{#acertos}}
 <ul>
     <li>
         {{.}}
     </li>
 </ul>
-{{/acertadas}}
+{{/acertos}}

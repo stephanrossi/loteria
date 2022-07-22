@@ -35,12 +35,11 @@ export const mega = {
         }
         catch (e) {
             console.log(e);
-            throw new Error('Algum erro ocorreu')
         }
     },
     getBetByDrawing: async (concurso) => {
         try {
-            let bet = await prisma.mega.findUnique({
+            let bet = await prisma.apostas.findUnique({
                 where: { concurso }
             })
 
@@ -48,6 +47,62 @@ export const mega = {
         } catch (e) {
             console.log(e);
         }
-    }
-}
+    },
+    getSorteioId: async (concurso) => {
+        try {
+            let sorteioId = prisma.mega.findUnique({
+                where: concurso,
+                select: { id }
+            })
 
+            return sorteioId
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    makeBet: async (loteria_id, concurso, dezenas_apostadas) => {
+        try {
+            let createBet = await prisma.apostas.create({
+                data: {
+                    loteria_id, concurso, dezenas_apostadas
+                }
+            })
+
+            return createBet
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    ,
+    fillBetTable: async (sorteioId, apostasId) => {
+        try {
+            let tableData = await prisma.mega.create({
+                data: {
+                    sorteioId,
+                    apostasId,
+                }
+            })
+
+            return tableData
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    fillDrawingTable: async (loteria_id = 1, concurso,
+        date,
+        dezenas_sorteadas, acumulou, acumuladaProxConcurso) => {
+        try {
+            let drawInfo = await prisma.sorteios.create({
+                data: {
+                    loteria_id, concurso,
+                    date,
+                    dezenas_sorteadas, acumulou, acumuladaProxConcurso
+                }
+            })
+
+            return drawInfo
+        } catch (e) {
+            console.log(e);
+        }
+    },
+}

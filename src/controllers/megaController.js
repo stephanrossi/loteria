@@ -11,43 +11,61 @@ export const getLatest = async (req, res) => {
 }
 
 export const getByDrawing = async (req, res) => {
-    const query = req.query.s
-    const { concurso, data: date, dezenas, acumulou, acumuladaProxConcurso } = await mega.getByDrawing(query)
+    try {
+        const { loteria_id = 1, draw } = req.body
 
-    let bets = await mega.getBetByDrawing(concurso)
-    console.log(bets.apostas.length);
-    console.log(bets.apostas);
+        let drawInfo = await mega.getByDrawing(draw)
 
-    let acertos = []
+        let concurso = drawInfo.concurso
+        let date = drawInfo.data
+        let dezenas = drawInfo.dezenas
+        let acumulou = drawInfo.acumulou
+        let acumuladaProxConcurso = drawInfo.acumuladaProxConcurso
 
-    if (bets.apostas.length <= 1) {
-        bets.apostas.filter(n => dezenas.includes(n) ? acertos.push(n) : '')
-    } else {
-        for (let n of bets.apostas) {
-            let match = n.filter(num => dezenas.includes(num))
-            acertos.push(match)
-        }
+        let drawData = await mega.fillDrawingTable(loteria_id, concurso,
+            date,
+            dezenas, acumulou, acumuladaProxConcurso)
+
+        let bets = await mega.getBetByDrawing(draw)
+
+        let acertos = []
+
+        bets.dezenas_apostadas.filter(n => drawData.dezenas_sorteadas.includes(n) ? acertos.push(n) : '')
+
+        // if (bets.dezenas_apostadas.length <= 1) {
+        //     bets.dezenas_apostadas.filter(n => drawData.dezenas_sorteadas.includes(n) ? acertos.push(n) : '')
+        // } else {
+        //     for (let n of bets.dezenas_apostadas) {
+        //         let match = n.filter(num => drawData.dezenas_sorteadas.includes(num))
+        //         acertos.push(match)
+        //     }
+        // }
+
+        return res.render('pages/mega', {
+            concurso,
+            date,
+            dezenas,
+            acertos,
+            acumulou,
+            acumuladaProxConcurso
+        })
+    } catch (e) {
+        console.log(e);
     }
 
-    return res.render('pages/mega', {
-        concurso,
-        date,
-        dezenas,
-        acertos
-    })
 }
 
 export const postBet = async (req, res) => {
-    const { concurso, apostas } = req.body
+    const { loteria_id, concurso, dezenas_apostadas } = req.body
 
     try {
-        await mega.createBet(parseInt(concurso), apostas)
+        let createBet = await mega.makeBet(loteria_id, concurso, dezenas_apostadas)
 
-        return res.status(201).json(
-            {
-                "aposta": apostas
-            }
-        )
+        let sorteioId = await mega.getSorteioId(concurso)
+
+        let betTable = await mega.fillBetTable(sorteioId, createBet.id)
+
+        return res.status(201).json({ betTable })
     } catch (e) {
         console.log(e);
     }
