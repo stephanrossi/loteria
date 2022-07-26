@@ -11,15 +11,18 @@ datasource db {
 }
 
 model Loteria {
-  id   Int    @id @default(autoincrement())
-  nome String @unique
+  id       Int       @id @default(autoincrement())
+  nome     String    @unique
+  Sorteios Sorteio[] @relation("loteria")
+  Apostas  Aposta[]  @relation("loteria")
 
-  @@map("loteria")
+  @@map("loterias")
 }
 
-model Apostas {
+model Aposta {
   id                Int      @id @default(autoincrement())
   loteria_id        Int
+  loteria           Loteria? @relation("loteria", fields: [loteria_id], references: [id])
   concurso          Int      @unique
   dezenas_apostadas String[]
   created_at        DateTime @default(now())
@@ -29,9 +32,10 @@ model Apostas {
   @@map("apostas")
 }
 
-model Sorteios {
+model Sorteio {
   id                    Int      @id @default(autoincrement())
   loteria_id            Int
+  loteria               Loteria? @relation("loteria", fields: [loteria_id], references: [id])
   concurso              Int      @unique
   date                  String
   acumulou              Boolean
@@ -44,11 +48,11 @@ model Sorteios {
 }
 
 model Mega {
-  sorteio   Sorteios @relation("sorteio", fields: [sorteioId], references: [id])
-  sorteioId Int
-  aposta    Apostas  @relation("aposta", fields: [apostasId], references: [id])
-  apostasId Int
+  sorteio    Sorteio @relation("sorteio", fields: [sorteio_id], references: [id])
+  sorteio_id Int
+  aposta     Aposta  @relation("aposta", fields: [apostas_id], references: [id])
+  apostas_id Int
 
-  @@id([sorteioId, apostasId])
+  @@id([sorteio_id, apostas_id])
   @@map("mega-sena")
 }

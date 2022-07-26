@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as MegaController from '../controllers/megaController.js'
+import * as MegaController from '../controllers/megaController'
 
 const router = Router()
 

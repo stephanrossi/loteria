@@ -1,12 +1,13 @@
 import express from "express"
+import 'express-async-errors'
 import dotenv from "dotenv"
 import cors from 'cors'
 import mustache from "mustache-express"
 import path from "path"
-import router from './routes/index.js'
+import router from './routes'
 import bodyParser from "body-parser"
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 //Initialize DOTENV
 dotenv.config()
@@ -24,7 +25,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //Set view engine
-app.set("views", path.join(__dirname, "src", "views"))
+app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "mst")
 app.engine("mst", mustache())
 

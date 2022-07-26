@@ -19,4 +19,4 @@ Dezenas acertadas:
         {{.}}
     </li>
 </ul>
-{{/acertos}}
+{{/acertos}} 
