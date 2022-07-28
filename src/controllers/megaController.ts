@@ -57,16 +57,21 @@ export const getByDrawing = async (req: Request, res: Response) => {
 export const postBet = async (req: Request, res: Response) => {
     const { loteria_id, concurso, dezenas_apostadas }: IBet = req.body
 
+    const loteriaId: number = Number(loteria_id)
+    const concursoNumber: number = Number(concurso)
+
     try {
-        let createBet = await mega.makeOrUpdateBet({ loteria_id, concurso, dezenas_apostadas })
+        let createBet = await mega.makeOrUpdateBet({ loteriaId, concursoNumber, dezenas_apostadas })
 
-        let sorteioId = await mega.getSorteioId(concurso)
+        let sorteioId = await mega.getSorteioId(concursoNumber)
 
-        let betTable = await mega.fillBetTable(sorteioId!.id, createBet!.id)
+        var betTable = await mega.fillBetTable(sorteioId!.id, createBet!.id)
 
         return res.status(201).json({ betTable })
+
     } catch (e) {
         console.log(e);
-    }
+        throw new Error("postBet:" + e);
 
+    }
 }

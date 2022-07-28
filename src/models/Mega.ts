@@ -61,12 +61,24 @@ export const mega = {
             console.log(e);
         }
     },
-    makeOrUpdateBet: async ({ loteria_id, concurso, dezenas_apostadas }: IBet): Promise<Aposta | undefined> => {
+    getApostaId: async (concurso: number) => {
         try {
-            let createBet = await prisma.aposta.upsert({
+            let apostaId = prisma.aposta.findUnique({
                 where: { concurso },
-                update: { dezenas_apostadas },
-                create: { loteria_id, concurso, dezenas_apostadas }
+                select: { id: true }
+            })
+
+            return apostaId
+        } catch (e) {
+            console.log(e);
+            throw new Error("Algo aconteceu")
+        }
+    },
+
+    makeOrUpdateBet: async ({ loteriaId: loteria_id, concursoNumber: concurso, dezenas_apostadas }: IBet): Promise<Aposta | undefined> => {
+        try {
+            let createBet = await prisma.aposta.create({
+                data: { loteria_id, concurso, dezenas_apostadas }
             })
 
             return createBet
@@ -74,8 +86,9 @@ export const mega = {
             console.log(e);
         }
     },
-    fillBetTable: async (sorteio_id: any, apostas_id: number) => {
+    fillBetTable: async (sorteio_id: any, apostas_id: any) => {
         try {
+
             let tableData = await prisma.mega.create({
                 data: { sorteio_id, apostas_id }
             })

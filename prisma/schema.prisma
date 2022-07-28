@@ -23,7 +23,7 @@ model Aposta {
   id                Int      @id @default(autoincrement())
   loteria_id        Int
   loteria           Loteria? @relation("loteria", fields: [loteria_id], references: [id])
-  concurso          Int      @unique
+  concurso          Int
   dezenas_apostadas String[]
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt

@@ -8,8 +8,10 @@ export interface ILottery extends IBet {
 }
 
 export interface IBet {
-    loteria_id: number
-    concurso: number
+    loteria_id?: number
+    loteriaId: number
+    concurso?: number
+    concursoNumber:number
     dezenas_apostadas: string[]
 }
 
