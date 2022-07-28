@@ -46,22 +46,24 @@
 
 ## :dart: About ##
 
-Describe your project
+O objetivo do projeto é criar um sistema para o cadastro de jogos feitos e também para a consulta de loterias da
+    Caixa, cruzando os dados para saber o quantidade de números acertados.
+    Tudo feito para fins de estudo.
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+:heavy_check_mark: Busca os resultados das loterias.;\
+:heavy_check_mark: Cadastra suas apostas.;\
+:heavy_check_mark: Faz o cruzamento entre o sorteio e as apostas.;
 
 ## :rocket: Technologies ##
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
+<!-- - [Expo](https://expo.io/) -->
 - [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
+<!-- - [React](https://pt-br.reactjs.org/) -->
+<!-- - [React Native](https://reactnative.dev/) -->
 - [TypeScript](https://www.typescriptlang.org/)
 
 ## :white_check_mark: Requirements ##
@@ -72,7 +74,7 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 
 ```bash
 # Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/loteria
+$ git clone https://github.com/stephanrossi/loteria
 
 # Access
 $ cd loteria
@@ -91,7 +93,7 @@ $ yarn start
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/stephanrossi" target="_blank">Stephan Rossi</a>
 
 &#xa0;
 
