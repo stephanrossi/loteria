@@ -29,8 +29,9 @@ app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "mst")
 app.engine("mst", mustache())
 
-//Set public folder
+//Set static folders
 app.use(express.static(path.join(__dirname, "../public")))
+// app.use(express.static(path.join(__dirname, "./js")))
 
 //Routes
 app.use(router)

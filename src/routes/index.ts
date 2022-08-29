@@ -1,14 +1,8 @@
 import { Router } from "express";
-import * as MegaController from '../controllers/megaController'
+import * as LotteryController from '../controllers/loteryController'
 
 const router = Router()
 
-router.get('/', (req, res) => {
-    res.render('pages/index')
-})
-
-router.get('/mega-sena', MegaController.getLatest)
-router.post('/mega-sena', MegaController.postBet)
-router.get('/mega-sena/concurso/', MegaController.getByDrawing)
+router.get('/loteria', LotteryController.getLottteryDataByDrawing)
 
 export default router
