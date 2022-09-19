@@ -20,39 +20,39 @@ model Loteria {
 }
 
 model Aposta {
-  id                Int      @id @default(autoincrement())
+  id                Int             @id @default(autoincrement())
   loteria_id        Int
-  loteria           Loteria? @relation("loteria", fields: [loteria_id], references: [id])
+  loteria           Loteria?        @relation("loteria", fields: [loteria_id], references: [id])
   concurso          Int
   dezenas_apostadas String[]
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
-  Mega              Mega[]   @relation("aposta")
+  created_at        DateTime        @default(now())
+  updated_at        DateTime        @updatedAt
+  Mega              ApostaSorteio[] @relation("aposta")
 
   @@map("apostas")
 }
 
 model Sorteio {
-  id                    Int      @id @default(autoincrement())
+  id                    Int             @id @default(autoincrement())
   loteria_id            Int
-  loteria               Loteria? @relation("loteria", fields: [loteria_id], references: [id])
-  concurso              Int      @unique
+  loteria               Loteria?        @relation("loteria", fields: [loteria_id], references: [id])
+  concurso              Int             @unique
   date                  String
   acumulou              Boolean
   acumuladaProxConcurso String
   dezenas_sorteadas     String[]
-  created_at            DateTime @default(now())
-  Mega                  Mega[]   @relation("sorteio")
+  created_at            DateTime        @default(now())
+  Mega                  ApostaSorteio[] @relation("sorteio")
 
   @@map("sorteios")
 }
 
-model Mega {
+model ApostaSorteio {
   sorteio    Sorteio @relation("sorteio", fields: [sorteio_id], references: [id])
   sorteio_id Int
   aposta     Aposta  @relation("aposta", fields: [apostas_id], references: [id])
   apostas_id Int
 
   @@id([sorteio_id, apostas_id])
-  @@map("mega-sena")
+  @@map("apostas_sorteios")
 }

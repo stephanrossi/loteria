@@ -15,15 +15,11 @@ export const getLottteryDataByDrawing = async (req: Request, res: Response) => {
     }
 }
 
-export const saveLotteryInfo = async (lottery, drawing) => {
+export const saveLotteryInfo = async (lottery: string, drawing: number) => {
     try {
-        const { loteria, nome, concurso, data, local, dezenas, premiacoes, estadosPremiados, acumulou, acumuladaProxConcurso, dataProxConcurso, proxConcurso, timeCoracao, mesSorte } = await getLottteryDataByDrawing(lottery, drawing)
+        const response = await Lottery.getLottteryDataByDrawing(lottery, drawing)
 
-        // const info = await Lottery.saveLotteryInfo()
-
-        console.log(getLotteryData);
-
-
+        return response
     } catch (e: any) {
         throw new Error(e)
     }

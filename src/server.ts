@@ -42,6 +42,6 @@ app.use((req, res) => {
 })
 
 //Start server
-app.listen(process.env.APP_PORT, () => {
-    console.log("\n" + "Server running at: http://localhost:" + process.env.APP_PORT + "\n")
+app.listen(process.env.APP_PORT || 3000, () => {
+    console.log("\n" + "Server running at: http://localhost:" + process.env.APP_PORT || 3000 + "\n")
 })
